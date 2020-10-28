@@ -29,7 +29,7 @@ public class Bowling {
 	public String fourWickets;
 	@CsvBindByName(column = "5w")
 	public String fiveWickets;
-	
+
 	@Override
 	public String toString() {
 		return "Bowling [pos=" + pos + ", player=" + player + ", matches=" + matches + ", innings=" + innings
@@ -37,5 +37,5 @@ public class Bowling {
 				+ ", economy=" + economy + ", strikeRate=" + strikeRate + ", fourWickets=" + fourWickets
 				+ ", fiveWickets=" + fiveWickets + "]";
 	}
-	
+
 }
