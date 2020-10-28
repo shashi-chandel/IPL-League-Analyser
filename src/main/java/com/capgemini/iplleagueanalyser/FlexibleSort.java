@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class FlexibleSort implements Comparator<Batting> {
 	public enum Order {
-		AVG, SR, BOUNDARIES, SR_AND_BOUNDARIES, AVG_AND_SR
+		AVG, SR, BOUNDARIES, SR_AND_BOUNDARIES, AVG_AND_SR, RUNS_AND_AVG
 	}
 
 	public Order sortingBy;
@@ -43,6 +43,15 @@ public class FlexibleSort implements Comparator<Batting> {
 			value = (Double.parseDouble(b2.getAvg()) - Double.parseDouble((b1.getAvg())));
 			if (value == 0) {
 				return (int) (Double.parseDouble(b2.getStrikeRate()) - Double.parseDouble((b1.getStrikeRate())));
+			}
+			value = setValue(value);
+			return (int) value;
+		case RUNS_AND_AVG:
+			if (b1.getAvg().contains("-"))
+				b1.setAvg("0");
+			value = Integer.parseInt(b2.getRuns()) - Integer.parseInt(b1.getRuns());
+			if (value == 0) {
+				return (int) (Double.parseDouble(b2.getAvg()) - Double.parseDouble((b1.getAvg())));
 			}
 			value = setValue(value);
 			return (int) value;
