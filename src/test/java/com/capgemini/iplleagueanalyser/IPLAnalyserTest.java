@@ -48,7 +48,15 @@ public class IPLAnalyserTest {
 	public void givenBattingData_WhenSortedByBoundaries_ShouldReturnHighestTotalBoundaries()
 			throws IPLAnaylserException {
 		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
-		String playerWithMaximumBoundaries = iplAnalyser.getSortedData(FlexibleSort.Order.BOUNDARIES);
-		assertEquals("Andre Russell" + "", playerWithMaximumBoundaries);
+		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOUNDARIES);
+		assertEquals("Andre Russell", sortedBattingList.get(0).getPlayer());
+	}
+
+	@Test
+	public void givenBattingData_WhenSortedByStrikeRateAndBoundaries_ShouldReturnProperList()
+			throws IPLAnaylserException {
+		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.SR_AND_BOUNDARIES);
+		assertEquals("Ishant Sharma", sortedBattingList.get(0).getPlayer());
 	}
 }
