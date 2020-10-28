@@ -7,8 +7,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.gson.Gson;
-
 public class IPLAnalyserTest {
 	private static final String BATTING_DATA_PATH = ".\\src\\main\\java\\com\\capgemini\\iplleagueanalyser\\resources\\batting.csv";
 	private static final String BOWLING_DATA_PATH = ".\\src\\main\\java\\com\\capgemini\\iplleagueanalyser\\resources\\bowling.csv";
@@ -35,14 +33,22 @@ public class IPLAnalyserTest {
 	@Test
 	public void givenBattingData_WhenSortedByAvg_ShouldReturnHighestAvgFirst() throws IPLAnaylserException {
 		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
-		sortedBattingList = iplAnalyser.getSortedData(FlexibleSort.Order.AVG);
+		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.AVG);
 		assertEquals("83.2", sortedBattingList.get(0).getAvg());
 	}
 
 	@Test
 	public void givenBattingData_WhenSortedBySR_ShouldReturnHighestSRFirst() throws IPLAnaylserException {
 		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
-		sortedBattingList = iplAnalyser.getSortedData(FlexibleSort.Order.SR);
+		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.SR);
 		assertEquals("333.33", sortedBattingList.get(0).getStrikeRate());
+	}
+
+	@Test
+	public void givenBattingData_WhenSortedByBoundaries_ShouldReturnHighestTotalBoundaries()
+			throws IPLAnaylserException {
+		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+		String playerWithMaximumBoundaries = iplAnalyser.getSortedData(FlexibleSort.Order.BOUNDARIES);
+		assertEquals("Andre Russell" + "", playerWithMaximumBoundaries);
 	}
 }

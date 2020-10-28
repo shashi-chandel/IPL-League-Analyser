@@ -1,26 +1,23 @@
 package com.capgemini.iplleagueanalyser;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import com.capgemini.indiastatecensusanalyser.CSVBuilderFactory;
 import com.capgemini.indiastatecensusanalyser.ICSVBuilder;
-import com.google.gson.Gson;
 import com.opencsv.exceptions.CsvException;
 
 public class IPLAnalyser {
 	List<Batting> battingList;
 	List<Bowling> bowlingList;
 
+	@SuppressWarnings("unchecked")
 	public int loadBattingData(String battingDataPath) throws IPLAnaylserException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(battingDataPath));) {
+			@SuppressWarnings("rawtypes")
 			ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
 			try {
 				battingList = csvBuilder.getCSVFileList(reader, Batting.class);
@@ -34,8 +31,10 @@ public class IPLAnalyser {
 		return battingList.size();
 	}
 
+	@SuppressWarnings("unchecked")
 	public int loadBowlingData(String bowlingDataPath) throws IPLAnaylserException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(bowlingDataPath));) {
+			@SuppressWarnings("rawtypes")
 			ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
 			try {
 				bowlingList = csvBuilder.getCSVFileList(reader, Bowling.class);
@@ -49,7 +48,18 @@ public class IPLAnalyser {
 		return bowlingList.size();
 	}
 
-	public List<Batting> getSortedData(FlexibleSort.Order order) throws IPLAnaylserException {
+	public String getSortedData(FlexibleSort.Order order) throws IPLAnaylserException {
+		if (battingList == null || battingList.size() == 0) {
+			throw new IPLAnaylserException("No batting list data", IPLAnaylserException.ExceptionType.NO_DATA);
+		}
+		FlexibleSort flexibleSort = new FlexibleSort(order);
+		List<Batting> sortedBattingList = battingList;
+		Collections.sort(sortedBattingList, flexibleSort);
+		System.out.println(sortedBattingList);
+		return sortedBattingList.get(0).getPlayer();
+	}
+	
+	public List<Batting> getSortedList(FlexibleSort.Order order) throws IPLAnaylserException {
 		if (battingList == null || battingList.size() == 0) {
 			throw new IPLAnaylserException("No batting list data", IPLAnaylserException.ExceptionType.NO_DATA);
 		}
