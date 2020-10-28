@@ -59,4 +59,11 @@ public class IPLAnalyserTest {
 		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.SR_AND_BOUNDARIES);
 		assertEquals("Ishant Sharma", sortedBattingList.get(0).getPlayer());
 	}
+
+	@Test
+	public void givenBattingData_WhenSortedByAvgAndStrikeRate_ShouldReturnSortedList() throws IPLAnaylserException {
+		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.AVG_AND_SR);
+		assertEquals("MS Dhoni", sortedBattingList.get(0).getPlayer());
+	}
 }
