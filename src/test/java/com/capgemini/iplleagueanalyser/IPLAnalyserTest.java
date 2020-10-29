@@ -125,15 +125,14 @@ public class IPLAnalyserTest {
 
 	@Test
 	public void givenBattingData_ShouldReturnMaxHundredsWithBestBattingAvg() throws IPLAnaylserException {
-		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
 		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.MAX100_AND_BAT_AVG, "Batsman");
 		assertEquals("David Warner", sortedBattingList.get(0).getPlayer());
 	}
-	
+
 	@Test
-	public void givenBattingData_ShouldReturnCricketersWithNoHundredAndFifty_WithBestBattingAvg() throws IPLAnaylserException {
-		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
+	public void givenBattingData_ShouldReturnCricketersWithNoHundredAndFifty_WithBestBattingAvg()
+			throws IPLAnaylserException {
 		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.ZERO_100AND50_BEST_AVG, "Batsman");
-		assertEquals("Marcus Stoinis",sortedBattingList.get(0).getPlayer());
+		assertEquals("Marcus Stoinis", sortedBattingList.get(0).getPlayer());
 	}
 }

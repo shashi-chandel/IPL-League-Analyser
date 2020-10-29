@@ -66,21 +66,22 @@ public class IPLAnalyser {
 		} else
 			throw new IPLAnaylserException("Wrong player type", IPLAnaylserException.ExceptionType.WRONG_PLAYER_TYPE);
 		Collections.sort(sortedList, flexibleSort);
-		sortedList = IPLAnalyser.filterList(sortedList,order);
+		sortedList = IPLAnalyser.filterList(sortedList, order);
 		System.out.println(sortedList);
 		return sortedList;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	private static <T> List<T> filterList(List<T> list,FlexibleSort.Order order){
-		if(list.get(0).getClass().equals(Batting.class)) {
+	private static <T> List<T> filterList(List<T> list, FlexibleSort.Order order) {
+		if (list.get(0).getClass().equals(Batting.class)) {
 			List<Batting> filteredList = (List<Batting>) list;
-			if(order.equals(FlexibleSort.Order.ZERO_100AND50_BEST_AVG))
-				return (List<T>) filteredList.stream().filter(batting->batting.getHundreds().equals("0")&&batting.getFifties().equals("0")).collect(Collectors.toList());
-			else 
+			if (order.equals(FlexibleSort.Order.ZERO_100AND50_BEST_AVG))
+				return (List<T>) filteredList.stream()
+						.filter(batting -> batting.getHundreds().equals("0") && batting.getFifties().equals("0"))
+						.collect(Collectors.toList());
+			else
 				return (List<T>) filteredList;
-		}
-		else {
+		} else {
 			@SuppressWarnings("unused")
 			List<Bowling> filteredList = (List<Bowling>) list;
 		}
