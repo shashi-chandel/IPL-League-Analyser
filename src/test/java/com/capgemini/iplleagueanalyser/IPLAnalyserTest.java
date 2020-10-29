@@ -88,4 +88,10 @@ public class IPLAnalyserTest {
 		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.ECONOMY,"Bowler");
 		assertEquals("4.8", sortedBowlingList.get(0).getEconomy());
 	}
+	
+	@Test
+	public void givenBowlingData_WhenSortedBySRandWicketHauls_ShouldReturnBestSortedList() throws IPLAnaylserException {
+		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_SR_AND_WICKETS,"Bowler");
+		assertEquals("Alzarri Joseph", sortedBowlingList.get(0).getPlayer());
+	}
 }
