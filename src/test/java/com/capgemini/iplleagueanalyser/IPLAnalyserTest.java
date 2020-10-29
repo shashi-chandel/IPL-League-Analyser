@@ -97,22 +97,18 @@ public class IPLAnalyserTest {
 
 	@Test
 	public void givenBowlingData_WhenSortedByAvgandSr_ShouldReturnBestSortedList() throws IPLAnaylserException {
-		iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
 		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_AVG_AND_SR, "Bowler");
 		assertEquals("Anukul Roy", sortedBowlingList.get(0).getPlayer());
 	}
 	
 	@Test
 	public void givenBowlingData_WhenSortedByWicketsAndAvg_ShouldReturnBestSortedList() throws IPLAnaylserException {
-		iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
 		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_WKTS_AND_AVG,"Bowler");
 		assertEquals("Imran Tahir", sortedBowlingList.get(0).getPlayer());
 	}
 	
 	@Test
 	public void givenBattingAndBowlingData_ShouldReturnCricketersWithBestBattingBowlingAvg()throws IPLAnaylserException{
-		iplAnalyser.loadBattingData(BATTING_DATA_PATH);
-		iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
 		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.BAT_AVG,"Batsman");
 		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_AVG,"Bowler");
 		assertEquals("83.2,11", sortedBattingList.get(0).getAvg()+","+sortedBowlingList.get(0).getAvg());
