@@ -113,4 +113,11 @@ public class IPLAnalyserTest {
 		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_AVG,"Bowler");
 		assertEquals("83.2,11", sortedBattingList.get(0).getAvg()+","+sortedBowlingList.get(0).getAvg());
 	}
+	
+	@Test
+	public void givenBattingAndBowlingData_ShouldReturnCricketersWithMaxRunsAndWickets()throws IPLAnaylserException{
+		sortedBattingList = iplAnalyser.getSortedList(FlexibleSort.Order.RUNS_AND_AVG, "Batsman");
+		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_WKTS_AND_AVG,"Bowler");
+		assertEquals("David Warner,Imran Tahir", sortedBattingList.get(0).getPlayer()+","+sortedBowlingList.get(0).getPlayer());
+	}
 }
