@@ -101,4 +101,11 @@ public class IPLAnalyserTest {
 		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_AVG_AND_SR, "Bowler");
 		assertEquals("Anukul Roy", sortedBowlingList.get(0).getPlayer());
 	}
+	
+	@Test
+	public void givenBowlingData_WhenSortedByWicketsAndAvg_ShouldReturnBestSortedList() throws IPLAnaylserException {
+		iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
+		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_WKTS_AND_AVG,"Bowler");
+		assertEquals("Imran Tahir", sortedBowlingList.get(0).getPlayer());
+	}
 }
