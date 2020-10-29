@@ -76,22 +76,29 @@ public class IPLAnalyserTest {
 		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_AVG, "Bowler");
 		assertEquals("11", sortedBowlingList.get(0).getAvg());
 	}
-	
+
 	@Test
 	public void givenBowlingData_WhenSortedByStrikeRate_ShouldReturnBestStrikeRateFirst() throws IPLAnaylserException {
-		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_SR,"Bowler");
+		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_SR, "Bowler");
 		assertEquals("8.66", sortedBowlingList.get(0).getStrikeRate());
 	}
-	
+
 	@Test
 	public void givenBowlingData_WhenSortedByEconomy_ShouldReturnBestEconomyBowlerFirst() throws IPLAnaylserException {
-		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.ECONOMY,"Bowler");
+		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.ECONOMY, "Bowler");
 		assertEquals("4.8", sortedBowlingList.get(0).getEconomy());
 	}
-	
+
 	@Test
 	public void givenBowlingData_WhenSortedBySRandWicketHauls_ShouldReturnBestSortedList() throws IPLAnaylserException {
-		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_SR_AND_WICKETS,"Bowler");
+		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_SR_AND_WICKETS, "Bowler");
 		assertEquals("Alzarri Joseph", sortedBowlingList.get(0).getPlayer());
+	}
+
+	@Test
+	public void givenBowlingData_WhenSortedByAvgandSr_ShouldReturnBestSortedList() throws IPLAnaylserException {
+		iplAnalyser.loadBowlingData(BOWLING_DATA_PATH);
+		sortedBowlingList = iplAnalyser.getSortedList(FlexibleSort.Order.BOWL_AVG_AND_SR, "Bowler");
+		assertEquals("Anukul Roy", sortedBowlingList.get(0).getPlayer());
 	}
 }

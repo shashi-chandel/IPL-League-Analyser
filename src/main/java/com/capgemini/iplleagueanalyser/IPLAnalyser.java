@@ -57,14 +57,12 @@ public class IPLAnalyser {
 			if (battingList == null || battingList.size() == 0)
 				throw new IPLAnaylserException("No batting list data", IPLAnaylserException.ExceptionType.NO_DATA);
 			sortedList = (List<T>) battingList;
-		}
-		else if(playerType.equals("Bowler")) {
+		} else if (playerType.equals("Bowler")) {
 			if (bowlingList == null || bowlingList.size() == 0)
 				throw new IPLAnaylserException("No bowling list data", IPLAnaylserException.ExceptionType.NO_DATA);
 			sortedList = (List<T>) bowlingList;
-		}
-		else 
-			throw new IPLAnaylserException("Wrong player type",IPLAnaylserException.ExceptionType.WRONG_PLAYER_TYPE);
+		} else
+			throw new IPLAnaylserException("Wrong player type", IPLAnaylserException.ExceptionType.WRONG_PLAYER_TYPE);
 		Collections.sort(sortedList, flexibleSort);
 		System.out.println(sortedList);
 		return sortedList;
